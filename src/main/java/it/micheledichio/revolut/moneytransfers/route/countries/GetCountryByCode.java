@@ -1,8 +1,5 @@
 package it.micheledichio.revolut.moneytransfers.route.countries;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -19,23 +16,23 @@ import spark.Response;
 import spark.Route;
 
 @Api("countries")
-@Path("/countries")
+@Path("/countries/{code}")
 @Produces("application/json")
-public class GetCountriesRoute implements Route {
-
+public class GetCountryByCode implements Route {
+	
 	@GET
-	@ApiOperation(value = "Gets all countries details", nickname = "GetCountriesRoute")
+	@ApiOperation(value = "Get information of a country by his ISO 3166-1 alpha-3 code", nickname = "GetCountryByCode")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Success", response = Country.class, responseContainer = "List"), //
+			@ApiResponse(code = 200, message = "Success", response = Country.class), //
 			@ApiResponse(code = 400, message = "Invalid input data", response = ApiError.class), //
-			@ApiResponse(code = 404, message = "Countries not found", response = ApiError.class) //
+			@ApiResponse(code = 404, message = "Country not found", response = ApiError.class) //
 	})
-	public List<Country> handle(@ApiParam(hidden = true) Request request, @ApiParam(hidden = true) Response response)
+	public Country handle(@ApiParam(hidden = true) Request request, @ApiParam(hidden = true) Response response)
 			throws Exception {
 		String paramId = request.queryParams("id");
-		System.out.printf("Path %s - parameter %s\n", GetCountriesRoute.class.getName(), paramId);
+		System.out.printf("Path %s - parameter %s\n", GetCountryByCode.class.getName(), paramId);
 		response.type("application/json");
-		return new LinkedList<Country>();
+		return new Country();
 	}
 
 }
