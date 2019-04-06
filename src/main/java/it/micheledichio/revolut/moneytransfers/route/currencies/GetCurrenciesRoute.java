@@ -26,18 +26,18 @@ import it.micheledichio.revolut.moneytransfers.service.CurrencyService;
 @Api("currencies")
 @Path("/currencies")
 @Produces("application/json")
-public class GetCurrencyRoute extends AbstractRequestHandler<Empty> {
+public class GetCurrenciesRoute extends AbstractRequestHandler<Empty> {
 	
-	private final Logger log = LoggerFactory.getLogger(GetCurrencyRoute.class);
+	private final Logger log = LoggerFactory.getLogger(GetCurrenciesRoute.class);
 	
 	private CurrencyAbstractService service;
 	
-	public GetCurrencyRoute() {
+	public GetCurrenciesRoute() {
 		super(Empty.class);
 		service = new CurrencyService();
 	}
 	
-	public GetCurrencyRoute(CurrencyAbstractService service) {
+	public GetCurrenciesRoute(CurrencyAbstractService service) {
 		super(Empty.class);
 		this.service = service;
 	}

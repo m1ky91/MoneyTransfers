@@ -6,6 +6,7 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class GetCurrencyByCodeRouteTest {
 		urlParams.put(":code", "32221");
 		
 		CurrencyAbstractService currencyService = EasyMock.createMock(CurrencyAbstractService.class);
-		expect(currencyService.getByCode(urlParams.get(":code"))).andReturn(null);
+		expect(currencyService.getByCode(urlParams.get(":code"))).andReturn(Collections.emptyList());
 		replay(currencyService);
 
 		GetCurrencyByCodeRoute route = new GetCurrencyByCodeRoute(currencyService);

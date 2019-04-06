@@ -19,7 +19,7 @@ import it.micheledichio.revolut.moneytransfers.model.Country;
 import it.micheledichio.revolut.moneytransfers.model.Currency;
 import it.micheledichio.revolut.moneytransfers.model.Empty;
 import it.micheledichio.revolut.moneytransfers.route.Answer;
-import it.micheledichio.revolut.moneytransfers.route.currencies.GetCurrencyRoute;
+import it.micheledichio.revolut.moneytransfers.route.currencies.GetCurrenciesRoute;
 import it.micheledichio.revolut.moneytransfers.service.CurrencyAbstractService;
 
 public class GetCurrenciesRouteTest {
@@ -32,7 +32,7 @@ public class GetCurrenciesRouteTest {
 		expect(currencyService.getAll()).andReturn(Collections.emptyList());
 		replay(currencyService);
 
-		GetCurrencyRoute route = new GetCurrencyRoute(currencyService);
+		GetCurrenciesRoute route = new GetCurrenciesRoute(currencyService);
 		assertEquals(
 				new Answer(HttpStatus.NOT_FOUND_404,
 						gson.toJson(new ApiError(HttpStatus.NOT_FOUND_404, "Currencies not found"))),
@@ -47,7 +47,7 @@ public class GetCurrenciesRouteTest {
 		expect(currencyService.getAll()).andReturn(Arrays.asList(new Currency("EUR", "European Euro", new Country("ITA", "Italy"))));
 		replay(currencyService);
 
-		GetCurrencyRoute route = new GetCurrencyRoute(currencyService);
+		GetCurrenciesRoute route = new GetCurrenciesRoute(currencyService);
 		assertEquals(
 				new Answer(HttpStatus.OK_200,
 						gson.toJson(Arrays.asList(new Currency("EUR", "European Euro", new Country("ITA", "Italy"))))),

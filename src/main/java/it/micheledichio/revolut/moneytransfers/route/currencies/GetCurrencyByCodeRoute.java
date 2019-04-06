@@ -58,7 +58,7 @@ public class GetCurrencyByCodeRoute extends AbstractRequestHandler<Empty> {
 		log.info("Endpoint /currencies/{code} called");
 		var currencies = service.getByCode(urlParams.get(":code"));
 
-		if (currencies == null || currencies.isEmpty()) 			
+		if (currencies.isEmpty()) 			
 			return new Answer(HttpStatus.NOT_FOUND_404, dataToJson(new ApiError(HttpStatus.NOT_FOUND_404, "Currencies not found")));
 		else 
 			return Answer.ok(dataToJson(currencies));
