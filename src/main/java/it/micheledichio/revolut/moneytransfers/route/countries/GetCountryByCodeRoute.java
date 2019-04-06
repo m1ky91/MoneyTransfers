@@ -7,6 +7,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import org.eclipse.jetty.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -27,6 +29,8 @@ import it.micheledichio.revolut.moneytransfers.service.CountryService;
 @Path("/countries/{code}")
 @Produces("application/json")
 public class GetCountryByCodeRoute extends AbstractRequestHandler<Empty> {
+	
+	private final Logger log = LoggerFactory.getLogger(GetCountryByCodeRoute.class);
 	
 	private CountryAbstractService service;
 	
@@ -51,6 +55,7 @@ public class GetCountryByCodeRoute extends AbstractRequestHandler<Empty> {
 	})
 	@Override
 	public Answer processImpl(@ApiParam(hidden = true) Empty value, @ApiParam(hidden = true) Map<String, String> urlParams) {
+		log.info("Endpoint /countries/{code} called");
 		Country country = service.get(urlParams.get(":code"));
 
 		if (country == null)

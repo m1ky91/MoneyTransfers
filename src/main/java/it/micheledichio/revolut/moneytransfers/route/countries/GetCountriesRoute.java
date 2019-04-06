@@ -7,6 +7,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import org.eclipse.jetty.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +28,8 @@ import it.micheledichio.revolut.moneytransfers.service.CountryService;
 @Produces("application/json")
 public class GetCountriesRoute extends AbstractRequestHandler<Empty> {
 	
+	private final Logger log = LoggerFactory.getLogger(GetCountriesRoute.class);
+	
 	private CountryAbstractService service;
 	
 	public GetCountriesRoute() {
@@ -39,13 +43,14 @@ public class GetCountriesRoute extends AbstractRequestHandler<Empty> {
 	}
 
 	@GET
-	@ApiOperation(value = "Gets all countries details", nickname = "GetCountriesRoute")
+	@ApiOperation(value = "Get all countries details", nickname = "GetCountriesRoute")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Success", response = Country.class, responseContainer = "List"), //
 			@ApiResponse(code = 404, message = "Countries not found", response = ApiError.class) //
 	})
 	@Override
 	public Answer processImpl(@ApiParam(hidden = true) Empty value, @ApiParam(hidden = true) Map<String, String> urlParams) {
+		log.info("Endpoint /countries called");
 		var countries = service.getAll();	
 		
 		if (countries.isEmpty()) 			

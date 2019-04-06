@@ -1,16 +1,17 @@
 package it.micheledichio.revolut.moneytransfers.model;
 
-public class Country {
+public class Currency {
 
 	private String code;
 	private String name;
-
-	public Country() {
-	}
-
-	public Country(String code, String name) {
+	private Country country;
+	
+	public Currency() {}
+	
+	public Currency(String code, String name, Country country) {
 		this.code = code;
 		this.name = name;
+		this.country = country;
 	}
 
 	public String getCode() {
@@ -27,6 +28,14 @@ public class Country {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
 }

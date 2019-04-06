@@ -13,11 +13,11 @@ public class CountryRepository implements CountryAbstractRepository {
 		entities.add(new Country("USA", "United States"));
 		entities.add(new Country("ITA", "Italy"));
 		entities.add(new Country("JPN", "Japan"));
-		entities.add(new Country("USD", "United Kingdom"));
+		entities.add(new Country("GBR", "United Kingdom"));
 	}
 	
 	public List<Country> findAll() {
-		return this.entities;
+		return entities;
 	}
 
 	public Country findById(String id) {

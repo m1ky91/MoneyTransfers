@@ -4,6 +4,7 @@ public class Database {
 	
 	private static Database dbInstance = new Database();
 	private CountryAbstractRepository countryRepository;
+	private CurrencyAbstractRepository currencyRepository;
 	
 	public static Database getInstance() {
 		return dbInstance;
@@ -11,10 +12,15 @@ public class Database {
 	
 	private Database() {
 		countryRepository = new CountryRepository();
+		currencyRepository = new CurrencyRepository();
 	}
 	
 	public CountryAbstractRepository getCountryRepository() {
 		return countryRepository;
+	}
+
+	public CurrencyAbstractRepository getCurrencyRepository() {
+		return currencyRepository;
 	}
 
 }

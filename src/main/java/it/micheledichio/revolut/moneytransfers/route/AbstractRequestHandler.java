@@ -3,16 +3,21 @@ package it.micheledichio.revolut.moneytransfers.route;
 import java.util.Map;
 
 import org.eclipse.jetty.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
 import it.micheledichio.revolut.moneytransfers.model.ApiError;
+import it.micheledichio.revolut.moneytransfers.model.Empty;
 import it.micheledichio.revolut.moneytransfers.model.Validable;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
 public abstract class AbstractRequestHandler<V extends Validable> implements RequestHandler<V>, Route {
+	
+	private final Logger log = LoggerFactory.getLogger(AbstractRequestHandler.class);
 
 	private Class<V> valueClass;
 
@@ -26,8 +31,8 @@ public abstract class AbstractRequestHandler<V extends Validable> implements Req
 	}
 
 	public final Answer process(V value, Map<String, String> urlParams) {
-		if (!value.isValid()) 
-			return new Answer(HttpStatus.BAD_REQUEST_400, dataToJson(new ApiError(HttpStatus.BAD_REQUEST_400, "400 Bad Request")));
+		if (value != null && !value.isValid()) 
+			return new Answer(HttpStatus.BAD_REQUEST_400, dataToJson(new ApiError(HttpStatus.BAD_REQUEST_400, "Bad Request")));
 		else 
 			return processImpl(value, urlParams);
 	}
@@ -36,8 +41,11 @@ public abstract class AbstractRequestHandler<V extends Validable> implements Req
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
+		log.info("Request from IP: " + request.ip());
 		Gson objectMapper = new Gson();
-		V value = objectMapper.fromJson(request.body(), valueClass);
+		V value = null;
+		if (valueClass != Empty.class)
+			value = objectMapper.fromJson(request.body(), valueClass);
 		Map<String, String> urlParams = request.params();
 		Answer answer = process(value, urlParams);
 		response.status(answer.getCode());
