@@ -33,7 +33,7 @@ public class RouteBuilder {
 			Method[] methods = clazz.getMethods();
 			for (Method method : methods) {
 				POST post = method.getAnnotation(POST.class);
-				String friendlyRoute = path.value().replaceAll("\\{(.*?)\\}", ":$1");
+				String friendlyRoute = path.value().replaceAll("\\{(.*?)\\}", ":$1"); // replace {param} with :param for Spark route pattern
 				if (post != null) {
 					post(friendlyRoute, sparkRoute);
 					break;

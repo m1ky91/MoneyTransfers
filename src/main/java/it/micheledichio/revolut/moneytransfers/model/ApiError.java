@@ -1,11 +1,17 @@
 package it.micheledichio.revolut.moneytransfers.model;
 
 public class ApiError {
-	
+
 	private int code;
 	private String message;
-	
-	public ApiError() {}
+
+	public ApiError() {
+	}
+
+	public ApiError(int code, String message) {
+		this.code = code;
+		this.message = message;
+	}
 
 	public int getCode() {
 		return code;
@@ -22,5 +28,5 @@ public class ApiError {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 }
