@@ -55,7 +55,7 @@ public class GetCurrencyByCodeRoute extends AbstractRequestHandler<Empty> {
 	})
 	@Override
 	public Answer processImpl(@ApiParam(hidden = true) Empty value, @ApiParam(hidden = true) Map<String, String> urlParams) {
-		log.info("Endpoint /currencies/{code} called");
+		log.info("Endpoint GET /currencies/{code} called");
 		var currencies = service.getByCode(urlParams.get(":code"));
 
 		if (currencies.isEmpty()) 			

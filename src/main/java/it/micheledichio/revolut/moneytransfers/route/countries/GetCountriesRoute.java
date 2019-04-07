@@ -50,7 +50,7 @@ public class GetCountriesRoute extends AbstractRequestHandler<Empty> {
 	})
 	@Override
 	public Answer processImpl(@ApiParam(hidden = true) Empty value, @ApiParam(hidden = true) Map<String, String> urlParams) {
-		log.info("Endpoint /countries called");
+		log.info("Endpoint GET /countries called");
 		var countries = service.getAll();	
 		
 		if (countries.isEmpty()) 			

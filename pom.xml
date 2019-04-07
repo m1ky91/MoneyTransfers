@@ -18,7 +18,7 @@
 		<slf4j.version>1.7.21</slf4j.version>
 		<jaxb.version>2.3.0</jaxb.version>
 		<gson.version>2.8.0</gson.version>
-		<easymock.version>3.4</easymock.version>
+		<easymock.version>3.5.1</easymock.version>
 		<compiler.version>3.2</compiler.version>
 	</properties>
 

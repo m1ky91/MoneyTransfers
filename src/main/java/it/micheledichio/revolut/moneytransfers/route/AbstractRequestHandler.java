@@ -32,8 +32,10 @@ public abstract class AbstractRequestHandler<V extends Validable> implements Req
 
 	public final Answer process(V value, Map<String, String> urlParams) {
 		if (value != null && !value.isValid()) 
-			return new Answer(HttpStatus.BAD_REQUEST_400, dataToJson(new ApiError(HttpStatus.BAD_REQUEST_400, "Bad Request")));
-		else 
+			return new Answer(HttpStatus.BAD_REQUEST_400, dataToJson(new ApiError(HttpStatus.BAD_REQUEST_400, "Invalid input data")));
+		else if (value == null && (valueClass != Empty.class))
+			return new Answer(HttpStatus.BAD_REQUEST_400, dataToJson(new ApiError(HttpStatus.BAD_REQUEST_400, "Invalid input data")));
+		else
 			return processImpl(value, urlParams);
 	}
 

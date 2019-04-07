@@ -50,7 +50,7 @@ public class GetRatesRoute extends AbstractRequestHandler<Empty> {
 	})
 	@Override
 	public Answer processImpl(@ApiParam(hidden = true) Empty value, @ApiParam(hidden = true) Map<String, String> urlParams) {
-		log.info("Endpoint /rates called");
+		log.info("Endpoint GET /rates called");
 		var rates = service.getAll();	
 		
 		if (rates.isEmpty()) 			

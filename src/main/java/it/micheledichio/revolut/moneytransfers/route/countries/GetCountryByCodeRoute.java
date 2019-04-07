@@ -55,7 +55,7 @@ public class GetCountryByCodeRoute extends AbstractRequestHandler<Empty> {
 	})
 	@Override
 	public Answer processImpl(@ApiParam(hidden = true) Empty value, @ApiParam(hidden = true) Map<String, String> urlParams) {
-		log.info("Endpoint /countries/{code} called");
+		log.info("Endpoint GET /countries/{code} called");
 		Country country = service.get(urlParams.get(":code"));
 
 		if (country == null)

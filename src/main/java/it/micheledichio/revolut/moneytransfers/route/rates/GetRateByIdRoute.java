@@ -24,6 +24,7 @@ import it.micheledichio.revolut.moneytransfers.route.AbstractRequestHandler;
 import it.micheledichio.revolut.moneytransfers.route.Answer;
 import it.micheledichio.revolut.moneytransfers.service.RateAbstractService;
 import it.micheledichio.revolut.moneytransfers.service.RateService;
+import it.micheledichio.revolut.moneytransfers.util.HandleParam;
 
 @Api("rates")
 @Path("/rates/{id}")
@@ -55,8 +56,11 @@ public class GetRateByIdRoute extends AbstractRequestHandler<Empty> {
 	})
 	@Override
 	public Answer processImpl(@ApiParam(hidden = true) Empty value, @ApiParam(hidden = true) Map<String, String> urlParams) {
-		log.info("Endpoint /rates/{id} called");
-		Rate rate = service.getById(Long.parseLong(urlParams.get(":id")));
+		log.info("Endpoint GET /rates/{id} called");
+		HandleParam handleParam = new HandleParam();
+		Long number = handleParam.parseLongWithDefault(urlParams.get(":id"), Long.parseLong("-1"));
+		
+		Rate rate = service.getById(number);
 
 		if (rate == null) 			
 			return new Answer(HttpStatus.NOT_FOUND_404, dataToJson(new ApiError(HttpStatus.NOT_FOUND_404, "Rate not found")));

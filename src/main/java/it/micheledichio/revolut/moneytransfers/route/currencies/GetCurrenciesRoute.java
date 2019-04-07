@@ -50,7 +50,7 @@ public class GetCurrenciesRoute extends AbstractRequestHandler<Empty> {
 	})
 	@Override
 	public Answer processImpl(@ApiParam(hidden = true) Empty value, @ApiParam(hidden = true) Map<String, String> urlParams) {
-		log.info("Endpoint /currencies called");
+		log.info("Endpoint GET /currencies called");
 		var currencies = service.getAll();	
 		
 		if (currencies.isEmpty()) 			
