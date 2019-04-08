@@ -6,12 +6,12 @@ public class Account implements Validable{
 	
 	private String number;
 	private BigDecimal balance;
-	private Currency currency;
+	private String currency;
 	private String sortCode;
 	
 	public Account() {}
 
-	public Account(String number, BigDecimal balance, Currency currency, String sortCode) {
+	public Account(String number, BigDecimal balance, String currency, String sortCode) {
 		this.number = number;
 		this.balance = balance;
 		this.currency = currency;
@@ -34,11 +34,11 @@ public class Account implements Validable{
 		this.balance = balance;
 	}
 
-	public Currency getCurrency() {
+	public String getCurrency() {
 		return currency;
 	}
 
-	public void setCurrency(Currency currency) {
+	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
 

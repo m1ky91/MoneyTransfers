@@ -18,7 +18,6 @@ import com.google.gson.Gson;
 
 import it.micheledichio.revolut.moneytransfers.model.Account;
 import it.micheledichio.revolut.moneytransfers.model.ApiError;
-import it.micheledichio.revolut.moneytransfers.model.Currency;
 import it.micheledichio.revolut.moneytransfers.route.Answer;
 import it.micheledichio.revolut.moneytransfers.route.accounts.PostAccountRoute;
 import it.micheledichio.revolut.moneytransfers.service.AccountAbstractService;
@@ -43,7 +42,7 @@ public class PostAccountRouteTest {
 	@Test
     public void anInvalidNewAccountWithoutNumberReturnsBadRequest() {
         Account newAccount = new Account();
-        newAccount.setCurrency(new Currency());
+        newAccount.setCurrency("EUR");
         newAccount.setBalance(new BigDecimal("1500"));
         newAccount.setSortCode("123456");
         assertFalse(newAccount.isValid());
@@ -61,7 +60,7 @@ public class PostAccountRouteTest {
     public void anInvalidNewAccountWithAnEmptyNumberReturnsBadRequest() {
         Account newAccount = new Account();
         newAccount.setNumber("");
-        newAccount.setCurrency(new Currency());
+        newAccount.setCurrency("EUR");
         newAccount.setBalance(new BigDecimal("1500"));
         newAccount.setSortCode("123456");
         assertFalse(newAccount.isValid());
@@ -79,7 +78,7 @@ public class PostAccountRouteTest {
     public void anInvalidNewAccountWithoutBalanceReturnsBadRequest() {
         Account newAccount = new Account();
         newAccount.setNumber("123456789");
-        newAccount.setCurrency(new Currency());
+        newAccount.setCurrency("EUR");
         newAccount.setSortCode("123456");
         assertFalse(newAccount.isValid());
 
@@ -96,7 +95,7 @@ public class PostAccountRouteTest {
     public void anInvalidNewAccountWithABalanceLessThanZeroReturnsBadRequest() {
         Account newAccount = new Account();
         newAccount.setNumber("123456789");
-        newAccount.setCurrency(new Currency());
+        newAccount.setCurrency("EUR");
         newAccount.setBalance(new BigDecimal("-1"));
         newAccount.setSortCode("123456");
         assertFalse(newAccount.isValid());
@@ -131,7 +130,7 @@ public class PostAccountRouteTest {
     public void anInvalidNewAccountWithoutSortCodeReturnsBadRequest() {
         Account newAccount = new Account();
         newAccount.setNumber("123456789");
-        newAccount.setCurrency(new Currency());
+        newAccount.setCurrency("EUR");
         newAccount.setBalance(new BigDecimal("1500"));
         assertFalse(newAccount.isValid());
 
@@ -148,7 +147,7 @@ public class PostAccountRouteTest {
     public void anAccountIsCorrectlyCreatedAndReturnsOk() {
         Account newAccount = new Account();
         newAccount.setNumber("123456789");
-        newAccount.setCurrency(new Currency());
+        newAccount.setCurrency("EUR");
         newAccount.setBalance(new BigDecimal("1500"));
         newAccount.setSortCode("123456");
         assertTrue(newAccount.isValid());

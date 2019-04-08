@@ -4,11 +4,11 @@ public class Currency {
 
 	private String code;
 	private String name;
-	private Country country;
+	private String country;
 	
 	public Currency() {}
 	
-	public Currency(String code, String name, Country country) {
+	public Currency(String code, String name, String country) {
 		this.code = code;
 		this.name = name;
 		this.country = country;
@@ -30,11 +30,11 @@ public class Currency {
 		this.name = name;
 	}
 
-	public Country getCountry() {
+	public String getCountry() {
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 

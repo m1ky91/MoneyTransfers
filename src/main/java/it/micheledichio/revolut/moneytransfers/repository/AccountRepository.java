@@ -5,16 +5,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import it.micheledichio.revolut.moneytransfers.model.Account;
-import it.micheledichio.revolut.moneytransfers.model.Country;
-import it.micheledichio.revolut.moneytransfers.model.Currency;
 
 public class AccountRepository implements AccountAbstractRepository {
 	
 	private List<Account> entities = new LinkedList<Account>();
 	
 	AccountRepository() {
-		entities.add(new Account("IT60X0542811101000000123456", new BigDecimal("2500"), new Currency("EUR", "European Euro", new Country("ITA", "Italy")), null));
-		entities.add(new Account("GB29NWBK60161331926819", new BigDecimal("3000"), new Currency("GBP", "British Pound", new Country("GBR", "United Kingdom")), "123456"));
+		entities.add(new Account("IT60X0542811101000000123456", new BigDecimal("2500"), "EUR", null));
+		entities.add(new Account("GB29NWBK60161331926819", new BigDecimal("3000"), "GBP", "123456"));
 	}
 
 	@Override

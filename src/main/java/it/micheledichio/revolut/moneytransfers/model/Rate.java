@@ -5,12 +5,12 @@ import java.math.BigDecimal;
 public class Rate {
 	
 	private Long id;
-	private Currency currency;
+	private String currency;
 	private BigDecimal gbpValue;
 	
 	public Rate() {}
 
-	public Rate(Long id, Currency currency, BigDecimal gbpValue) {
+	public Rate(Long id, String currency, BigDecimal gbpValue) {
 		this.id = id;
 		this.currency = currency;
 		this.gbpValue = gbpValue;
@@ -24,11 +24,11 @@ public class Rate {
 		this.id = id;
 	}
 
-	public Currency getCurrency() {
+	public String getCurrency() {
 		return currency;
 	}
 
-	public void setCurrency(Currency currency) {
+	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
 

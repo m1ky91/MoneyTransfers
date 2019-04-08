@@ -15,7 +15,6 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 import it.micheledichio.revolut.moneytransfers.model.ApiError;
-import it.micheledichio.revolut.moneytransfers.model.Country;
 import it.micheledichio.revolut.moneytransfers.model.Currency;
 import it.micheledichio.revolut.moneytransfers.model.Empty;
 import it.micheledichio.revolut.moneytransfers.route.Answer;
@@ -44,13 +43,13 @@ public class GetCurrenciesRouteTest {
 	@Test
 	public void aPopulatedRepositoryReturnsOkAndListOfCurrencies() {
 		CurrencyAbstractService currencyService = EasyMock.createMock(CurrencyAbstractService.class);
-		expect(currencyService.getAll()).andReturn(Arrays.asList(new Currency("EUR", "European Euro", new Country("ITA", "Italy"))));
+		expect(currencyService.getAll()).andReturn(Arrays.asList(new Currency("EUR", "European Euro", "ITA")));
 		replay(currencyService);
 
 		GetCurrenciesRoute route = new GetCurrenciesRoute(currencyService);
 		assertEquals(
 				new Answer(HttpStatus.OK_200,
-						gson.toJson(Arrays.asList(new Currency("EUR", "European Euro", new Country("ITA", "Italy"))))),
+						gson.toJson(Arrays.asList(new Currency("EUR", "European Euro", "ITA")))),
 				route.process(new Empty(), Collections.emptyMap()));
 		
 		verify(currencyService);

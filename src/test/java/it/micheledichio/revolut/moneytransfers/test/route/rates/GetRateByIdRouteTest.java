@@ -17,8 +17,6 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 import it.micheledichio.revolut.moneytransfers.model.ApiError;
-import it.micheledichio.revolut.moneytransfers.model.Country;
-import it.micheledichio.revolut.moneytransfers.model.Currency;
 import it.micheledichio.revolut.moneytransfers.model.Empty;
 import it.micheledichio.revolut.moneytransfers.model.Rate;
 import it.micheledichio.revolut.moneytransfers.route.Answer;
@@ -53,12 +51,12 @@ public class GetRateByIdRouteTest {
 		urlParams.put(":id", "1");
 		
 		RateAbstractService rateService = EasyMock.createMock(RateAbstractService.class);
-		expect(rateService.getById(Long.decode(urlParams.get(":id")))).andReturn(new Rate(Long.parseLong("1"), new Currency("EUR", "European Euro", new Country("ITA", "Italy")), new BigDecimal("0.86072")));
+		expect(rateService.getById(Long.decode(urlParams.get(":id")))).andReturn(new Rate(Long.parseLong("1"), "EUR", new BigDecimal("0.86072")));
 		replay(rateService);
 
 		GetRateByIdRoute route = new GetRateByIdRoute(rateService);
 		assertEquals(
-				Answer.ok(gson.toJson(new Rate(Long.parseLong("1"), new Currency("EUR", "European Euro", new Country("ITA", "Italy")), new BigDecimal("0.86072")))),
+				Answer.ok(gson.toJson(new Rate(Long.parseLong("1"), "EUR", new BigDecimal("0.86072")))),
 				route.process(new Empty(), urlParams));
 		
 		verify(rateService);

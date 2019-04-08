@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import it.micheledichio.revolut.moneytransfers.model.Country;
 import it.micheledichio.revolut.moneytransfers.model.Currency;
 
 public class CurrencyRepository implements CurrencyAbstractRepository {
@@ -12,10 +11,10 @@ public class CurrencyRepository implements CurrencyAbstractRepository {
 	private List<Currency> entities = new LinkedList<Currency>();
 	
 	CurrencyRepository() {
-		entities.add(new Currency("USD", "U.S. Dollar", new Country("USA", "United States")));
-		entities.add(new Currency("EUR", "European Euro", new Country("ITA", "Italy")));
-		entities.add(new Currency("JPY", "Japanese Yen", new Country("JPN", "Japan")));
-		entities.add(new Currency("GBP", "British Pound", new Country("GBR", "United Kingdom")));
+		entities.add(new Currency("USD", "U.S. Dollar", "USA"));
+		entities.add(new Currency("EUR", "European Euro","ITA"));
+		entities.add(new Currency("JPY", "Japanese Yen", "JPN"));
+		entities.add(new Currency("GBP", "British Pound", "GBR"));
 	}
 
 	@Override

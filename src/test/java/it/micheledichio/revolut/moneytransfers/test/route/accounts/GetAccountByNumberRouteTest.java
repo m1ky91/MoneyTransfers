@@ -17,8 +17,6 @@ import com.google.gson.Gson;
 
 import it.micheledichio.revolut.moneytransfers.model.Account;
 import it.micheledichio.revolut.moneytransfers.model.ApiError;
-import it.micheledichio.revolut.moneytransfers.model.Country;
-import it.micheledichio.revolut.moneytransfers.model.Currency;
 import it.micheledichio.revolut.moneytransfers.model.Empty;
 import it.micheledichio.revolut.moneytransfers.route.Answer;
 import it.micheledichio.revolut.moneytransfers.route.accounts.GetAccountByNumberRoute;
@@ -52,12 +50,12 @@ public class GetAccountByNumberRouteTest {
 		urlParams.put(":number", "IT60X0542811101000000123456");
 		
 		AccountAbstractService accountService = EasyMock.createMock(AccountAbstractService.class);
-		expect(accountService.getByNumber(urlParams.get(":number"))).andReturn(new Account("IT60X0542811101000000123456", new BigDecimal("2500"), new Currency("EUR", "European Euro", new Country("ITA", "Italy")), null));
+		expect(accountService.getByNumber(urlParams.get(":number"))).andReturn(new Account("IT60X0542811101000000123456", new BigDecimal("2500"), "EUR", null));
 		replay(accountService);
 
 		GetAccountByNumberRoute route = new GetAccountByNumberRoute(accountService);
 		assertEquals(
-				Answer.ok(gson.toJson(new Account("IT60X0542811101000000123456", new BigDecimal("2500"), new Currency("EUR", "European Euro", new Country("ITA", "Italy")), null))),
+				Answer.ok(gson.toJson(new Account("IT60X0542811101000000123456", new BigDecimal("2500"), "EUR", null))),
 				route.process(new Empty(), urlParams));
 		
 		verify(accountService);

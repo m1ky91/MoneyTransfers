@@ -16,8 +16,6 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 import it.micheledichio.revolut.moneytransfers.model.ApiError;
-import it.micheledichio.revolut.moneytransfers.model.Country;
-import it.micheledichio.revolut.moneytransfers.model.Currency;
 import it.micheledichio.revolut.moneytransfers.model.Empty;
 import it.micheledichio.revolut.moneytransfers.model.Rate;
 import it.micheledichio.revolut.moneytransfers.route.Answer;
@@ -46,13 +44,13 @@ public class GetRatesRouteTest {
 	@Test
 	public void aPopulatedRepositoryReturnsOkAndListOfRates() {
 		RateAbstractService rateService = EasyMock.createMock(RateAbstractService.class);
-		expect(rateService.getAll()).andReturn(Arrays.asList(new Rate(Long.parseLong("1"), new Currency("EUR", "European Euro", new Country("ITA", "Italy")), new BigDecimal("0.86072"))));
+		expect(rateService.getAll()).andReturn(Arrays.asList(new Rate(Long.parseLong("1"), "EUR", new BigDecimal("0.86072"))));
 		replay(rateService);
 
 		GetRatesRoute route = new GetRatesRoute(rateService);
 		assertEquals(
 				new Answer(HttpStatus.OK_200,
-						gson.toJson(Arrays.asList(new Rate(Long.parseLong("1"), new Currency("EUR", "European Euro", new Country("ITA", "Italy")), new BigDecimal("0.86072"))))),
+						gson.toJson(Arrays.asList(new Rate(Long.parseLong("1"), "EUR", new BigDecimal("0.86072"))))),
 				route.process(new Empty(), Collections.emptyMap()));
 		
 		verify(rateService);
