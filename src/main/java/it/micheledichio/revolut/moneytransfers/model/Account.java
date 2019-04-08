@@ -2,6 +2,8 @@ package it.micheledichio.revolut.moneytransfers.model;
 
 import java.math.BigDecimal;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Account implements Validable{
 	
 	private String number;
@@ -50,6 +52,7 @@ public class Account implements Validable{
 		this.sortCode = sortCode;
 	}
 
+	@ApiModelProperty(hidden = true)
 	@Override
 	public boolean isValid() {
 		return number != null && !number.isEmpty()

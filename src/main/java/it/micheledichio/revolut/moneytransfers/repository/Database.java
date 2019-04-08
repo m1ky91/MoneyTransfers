@@ -7,6 +7,7 @@ public class Database {
 	private CurrencyAbstractRepository currencyRepository;
 	private RateAbstractRepository rateRepository;
 	private AccountAbstractRepository accountRepository;
+	private BeneficiaryAbstractRepository beneficiaryRepository;
 	
 	public static Database getInstance() {
 		return dbInstance;
@@ -17,6 +18,7 @@ public class Database {
 		currencyRepository = new CurrencyRepository();
 		rateRepository = new RateRepository();
 		accountRepository = new AccountRepository();
+		beneficiaryRepository = new BeneficiaryRepository();
 	}
 	
 	public CountryAbstractRepository getCountryRepository() {
@@ -33,6 +35,10 @@ public class Database {
 
 	public AccountAbstractRepository getAccountRepository() {
 		return accountRepository;
+	}
+
+	public BeneficiaryAbstractRepository getBeneficiaryRepository() {
+		return beneficiaryRepository;
 	}
 
 }
