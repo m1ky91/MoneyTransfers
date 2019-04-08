@@ -2,7 +2,7 @@ package it.micheledichio.revolut.moneytransfers.model;
 
 import io.swagger.annotations.ApiModelProperty;
 
-public class Beneficiary implements Validable {
+public class User implements Validable {
 	
 	private String username;
 	private String password;
@@ -12,9 +12,9 @@ public class Beneficiary implements Validable {
 	private String mobilePhone;
 	private String email;
 	
-	public Beneficiary() {}
+	public User() {}
 
-	public Beneficiary(String username, String password, String firstName, String lastName, String account) {
+	public User(String username, String password, String firstName, String lastName, String account) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
