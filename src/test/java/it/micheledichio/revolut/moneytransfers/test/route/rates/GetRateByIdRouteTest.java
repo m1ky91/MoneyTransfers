@@ -46,7 +46,7 @@ public class GetRateByIdRouteTest {
 	}
 	
 	@Test
-	public void aCodePresentInRepositoryReturnsOkAndRelatedCurrencies() {
+	public void anIdPresentInRepositoryReturnsOkAndRelatedRate() {
 		Map<String, String> urlParams = new HashMap<String, String>();
 		urlParams.put(":id", "1");
 		

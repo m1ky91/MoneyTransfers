@@ -15,7 +15,7 @@ public class CountryService implements CountryAbstractService {
 	}
 	
 	public CountryService(CountryAbstractRepository countryRepository) {
-		this.countryRepository = countryRepository;
+		this.countryRepository = countryRepository; 
 	}
 
 	@Override

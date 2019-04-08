@@ -26,6 +26,6 @@ public class CurrencyService implements CurrencyAbstractService {
 	@Override
 	public List<Currency> getByCode(String code) {
 		return currencyRepository.findByCode(code);
-	}
+	} 
 
 }

@@ -28,4 +28,4 @@ public class RateService implements RateAbstractService {
 		return rateRepository.findById(id);
 	}
 
-}
+} 

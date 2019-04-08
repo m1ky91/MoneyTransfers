@@ -38,5 +38,4 @@ public class AccountService implements AccountAbstractService {
 		return accountRepository.update(account);
 	}
 
-
 }

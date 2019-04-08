@@ -45,7 +45,7 @@ public class GetCurrencyByCodeRoute extends AbstractRequestHandler<Empty> {
 	}
 	
 	@GET
-	@ApiOperation(value = "Get information of a currency by his ISO 4217 code", nickname = "GetCurrencyByCodeRoute")
+	@ApiOperation(value = "Get informations of currencies for a given ISO 4217 code", nickname = "GetCurrencyByCodeRoute")
 	@ApiImplicitParams({
 	    @ApiImplicitParam(name = "code", value = "Currency ISO 4217 code", required = true, dataType = "string", paramType = "path")
 	  })

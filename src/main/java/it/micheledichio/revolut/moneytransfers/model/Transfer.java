@@ -2,7 +2,9 @@ package it.micheledichio.revolut.moneytransfers.model;
 
 import java.math.BigDecimal;
 
-public class Transfer {
+import io.swagger.annotations.ApiModelProperty;
+
+public class Transfer implements Validable {
 	
 	private Long id;
 	private BigDecimal amount;
@@ -58,6 +60,15 @@ public class Transfer {
 
 	public void setBeneficiary(String beneficiary) {
 		this.beneficiary = beneficiary;
+	}
+
+	@ApiModelProperty(hidden = true)
+	@Override
+	public boolean isValid() {
+		return amount != null && (amount.compareTo(BigDecimal.ZERO) >= 0)
+				&& reference != null && !reference.isEmpty()
+				&& sender != null && !sender.isEmpty()
+				&& beneficiary != null && !beneficiary.isEmpty();
 	}
 
 }

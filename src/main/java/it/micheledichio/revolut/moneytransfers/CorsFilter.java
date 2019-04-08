@@ -25,7 +25,7 @@ public class CorsFilter implements Filter {
 		response.header(headerAllowHeaders, headers);
 		
 		if (request.requestMethod().equals("OPTIONS")) {
-			response.header(headerRequestMaxAge, "1728000");
+			response.header(headerRequestMaxAge, "1728000"); // preflight request that checks to see if the CORS protocol is understood
 			response.status(HttpStatus.NO_CONTENT_204);
 		}
 	}

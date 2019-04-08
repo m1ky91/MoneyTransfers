@@ -36,6 +36,6 @@ public class UserService implements UserAbstractService {
 	@Override
 	public User update(User user) {
 		return userRepository.update(user);
-	}
+	} 
 
 }
