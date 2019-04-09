@@ -5,10 +5,17 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
+
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import it.micheledichio.revolut.moneytransfers.model.User;
 import it.micheledichio.revolut.moneytransfers.repository.UserAbstractRepository;
+import it.micheledichio.revolut.moneytransfers.service.UserAbstractService;
 import it.micheledichio.revolut.moneytransfers.service.UserService;
 
 public class UserServiceTest {
@@ -59,6 +66,29 @@ public class UserServiceTest {
         assertEquals(null, service.update(null));
 
         verify(repository);
+	}
+	
+	@Test
+	public void givenMultiThread() {
+		User newUser = new User();
+        newUser.setUsername("ab");
+        newUser.setPassword("password");
+        newUser.setFirstName("a");
+        newUser.setLastName("b");
+
+		ExecutorService threadPool = Executors.newFixedThreadPool(3);
+		UserAbstractService service = new UserService();
+		
+		int preRaceConditionSize = service.getAll().size();
+		
+		IntStream.range(0, 10000).forEach(count -> threadPool.submit(() -> service.create(newUser)));
+		try {
+			threadPool.awaitTermination(50, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		assertEquals(preRaceConditionSize + 10000, service.getAll().size());
 	}
 
 }

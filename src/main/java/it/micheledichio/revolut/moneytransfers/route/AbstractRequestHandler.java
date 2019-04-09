@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import it.micheledichio.revolut.moneytransfers.model.ApiError;
 import it.micheledichio.revolut.moneytransfers.model.Empty;
@@ -44,16 +45,25 @@ public abstract class AbstractRequestHandler<V extends Validable> implements Req
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
 		log.info("Request from IP: " + request.ip());
-		Gson objectMapper = new Gson();
-		V value = null;
-		if (valueClass != Empty.class)
-			value = objectMapper.fromJson(request.body(), valueClass);
-		Map<String, String> urlParams = request.params();
-		Answer answer = process(value, urlParams);
-		response.status(answer.getCode());
-		response.type("application/json");
-		response.body(answer.getBody());
-		return answer.getBody();
+		
+		try {
+			Gson objectMapper = new Gson();
+			V value = null;
+			if (valueClass != Empty.class)
+				value = objectMapper.fromJson(request.body(), valueClass);
+			Map<String, String> urlParams = request.params();
+			Answer answer = process(value, urlParams);
+			response.status(answer.getCode());
+			response.type("application/json");
+			response.body(answer.getBody());
+			return answer.getBody();
+		} catch (JsonSyntaxException e) {
+			Answer answer = new Answer(HttpStatus.BAD_REQUEST_400, dataToJson(new ApiError(HttpStatus.BAD_REQUEST_400, "Invalid input data")));
+			response.status(answer.getCode());
+			response.type("application/json");
+			response.body(answer.getBody());			
+			return answer.getBody();
+		}
 	}
 
 }

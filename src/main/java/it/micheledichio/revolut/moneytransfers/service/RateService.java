@@ -19,12 +19,12 @@ public class RateService implements RateAbstractService {
 	}
 
 	@Override
-	public List<Rate> getAll() {
+	public synchronized List<Rate> getAll() {
 		return rateRepository.findAll();
 	}
 
 	@Override
-	public Rate getById(Long id) {
+	public synchronized Rate getById(Long id) {
 		return rateRepository.findById(id);
 	}
 

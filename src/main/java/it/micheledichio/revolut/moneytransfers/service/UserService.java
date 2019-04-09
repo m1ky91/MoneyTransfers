@@ -19,22 +19,22 @@ public class UserService implements UserAbstractService {
 	}
 
 	@Override
-	public List<User> getAll() {
+	public synchronized List<User> getAll() {
 		return userRepository.findAll();
 	}
 
 	@Override
-	public User getByUsername(String username) {
+	public synchronized User getByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
 
 	@Override
-	public User create(User user) {
+	public synchronized User create(User user) {
 		return userRepository.save(user);
 	}
 
 	@Override
-	public User update(User user) {
+	public synchronized User update(User user) {
 		return userRepository.update(user);
 	} 
 

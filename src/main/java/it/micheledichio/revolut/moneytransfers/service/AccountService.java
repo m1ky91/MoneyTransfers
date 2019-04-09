@@ -19,22 +19,22 @@ public class AccountService implements AccountAbstractService {
 	}
 
 	@Override
-	public List<Account> getAll() {
+	public synchronized List<Account> getAll() {
 		return accountRepository.findAll();
 	}
 
 	@Override
-	public Account getByNumber(String number) {
+	public synchronized Account getByNumber(String number) {
 		return accountRepository.findByNumber(number);
 	}
 
 	@Override
-	public Account create(Account account) {
+	public synchronized Account create(Account account) {
 		return accountRepository.save(account);
 	}
 
 	@Override
-	public Account update(Account account) {
+	public synchronized Account update(Account account) {
 		return accountRepository.update(account);
 	}
 

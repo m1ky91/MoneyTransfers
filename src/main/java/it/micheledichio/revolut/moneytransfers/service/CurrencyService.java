@@ -19,12 +19,12 @@ public class CurrencyService implements CurrencyAbstractService {
 	}
 
 	@Override
-	public List<Currency> getAll() {
+	public synchronized List<Currency> getAll() {
 		return currencyRepository.findAll();
 	}
 
 	@Override
-	public List<Currency> getByCode(String code) {
+	public synchronized List<Currency> getByCode(String code) {
 		return currencyRepository.findByCode(code);
 	} 
 

@@ -19,22 +19,22 @@ public class TransferService implements TransferAbstractService {
 	}
 
 	@Override
-	public List<Transfer> getAll() {
+	public synchronized List<Transfer> getAll() {
 		return transferRepository.findAll();
 	}
 
 	@Override
-	public Transfer getById(Long id) {
+	public synchronized Transfer getById(Long id) {
 		return transferRepository.findById(id);
 	}
 	
 	@Override
-	public List<Transfer> getBySender(String username) {
+	public synchronized List<Transfer> getBySender(String username) {
 		return transferRepository.findBySender(username);
 	}
 
 	@Override
-	public Transfer create(Transfer transfer) {
+	public synchronized Transfer create(Transfer transfer) {
 		return transferRepository.save(transfer);
 	} 
 

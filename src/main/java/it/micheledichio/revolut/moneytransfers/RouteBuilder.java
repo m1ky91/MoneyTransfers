@@ -7,6 +7,8 @@ import static spark.Spark.put;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.DELETE;
@@ -22,8 +24,8 @@ import spark.Route;
 
 public class RouteBuilder {
 
-	public static void setupRoutes(String packageName) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
-
+	public static List<String> setupRoutes(String packageName) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		List<String> pathsList = new LinkedList<String>();
 		Reflections reflections = new Reflections(packageName);
 		Set<Class<?>> apiRoutes = reflections.getTypesAnnotatedWith(Api.class);
 
@@ -36,29 +38,36 @@ public class RouteBuilder {
 				String friendlyRoute = path.value().replaceAll("\\{(.*?)\\}", ":$1"); // replace {param} with :param for Spark route pattern
 				if (post != null) {
 					post(friendlyRoute, sparkRoute);
+					pathsList.add("POST " + friendlyRoute);
 					break;
 				}
 
 				GET get = method.getAnnotation(GET.class);
 				if (get != null) {
 					get(friendlyRoute, sparkRoute);
+					pathsList.add("GET " + friendlyRoute);
 					break;
 				}
 
 				DELETE delete = method.getAnnotation(DELETE.class);
 				if (delete != null) {
 					delete(friendlyRoute, sparkRoute);
+					pathsList.add("DELETE " + friendlyRoute);
 					break;
 				}
 
 				PUT put = method.getAnnotation(PUT.class);
 				if (put != null) {
 					put(friendlyRoute, sparkRoute);
+					pathsList.add("PUT " +friendlyRoute);
 					break;
 				}
 			}
 
 		}
+		
+		return pathsList;
+		
 	}
 
 }

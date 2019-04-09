@@ -18,12 +18,9 @@ import com.google.gson.Gson;
 
 import it.micheledichio.revolut.moneytransfers.model.ApiError;
 import it.micheledichio.revolut.moneytransfers.model.Transfer;
-import it.micheledichio.revolut.moneytransfers.model.User;
 import it.micheledichio.revolut.moneytransfers.route.Answer;
 import it.micheledichio.revolut.moneytransfers.route.transfers.PostTransferRoute;
-import it.micheledichio.revolut.moneytransfers.route.users.PostUserRoute;
 import it.micheledichio.revolut.moneytransfers.service.TransferAbstractService;
-import it.micheledichio.revolut.moneytransfers.service.UserAbstractService;
 
 public class PostTransferRouteTest {
 	
@@ -201,21 +198,21 @@ public class PostTransferRouteTest {
         verify(service);
     }
 	
-	//@Test
-    public void anUserIsCorrectlyCreatedAndReturnsOk() {
-        User newUser = new User();
-        newUser.setUsername("ab");
-        newUser.setPassword("password");
-        newUser.setFirstName("a");
-        newUser.setLastName("b");
-        assertTrue(newUser.isValid());
+	@Test
+    public void anTransferIsCorrectlyCreatedAndReturnsOk() {
+    	Transfer newTransfer = new Transfer();
+		newTransfer.setAmount(new BigDecimal("1"));
+		newTransfer.setReference("send 1");
+		newTransfer.setSender("ab");
+		newTransfer.setBeneficiary("cd");
+        assertTrue(newTransfer.isValid());
 
-        UserAbstractService service = EasyMock.createMock(UserAbstractService.class);
-        expect(service.create(newUser)).andReturn(newUser);
+        TransferAbstractService service = EasyMock.createMock(TransferAbstractService.class);
+        expect(service.create(newTransfer)).andReturn(newTransfer);
         replay(service);
 
-        PostUserRoute route = new PostUserRoute(service);
-        assertEquals(Answer.ok(gson.toJson(newUser)), route.process(newUser, Collections.emptyMap()));
+        PostTransferRoute route = new PostTransferRoute(service);
+        assertEquals(Answer.ok(gson.toJson(newTransfer)), route.process(newTransfer, Collections.emptyMap()));
 
         verify(service);
     }

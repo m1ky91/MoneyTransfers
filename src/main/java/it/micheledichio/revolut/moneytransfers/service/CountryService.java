@@ -19,12 +19,12 @@ public class CountryService implements CountryAbstractService {
 	}
 
 	@Override
-	public List<Country> getAll() {
+	public synchronized List<Country> getAll() {
 		return countryRepository.findAll();
 	}
 
 	@Override
-	public Country get(String id) {
+	public synchronized Country get(String id) {
 		return countryRepository.findById(id);
 	}
 
