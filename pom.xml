@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>it.micheledichio.revolut</groupId>
+	<groupId>it.micheledichio</groupId>
 	<artifactId>MoneyTransfers</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<description>RESTful API for money transfers between accounts</description>
@@ -107,7 +107,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>it.micheledichio.revolut.moneytransfers.App</mainClass>
+							<mainClass>it.micheledichio.moneytransfers.App</mainClass>
 							<classpathPrefix>dependency-jars/</classpathPrefix>
 						</manifest>
 					</archive>
@@ -137,7 +137,7 @@
 							</descriptorRefs>
 							<archive>
 								<manifest>
-									<mainClass>it.micheledichio.revolut.moneytransfers.App</mainClass>
+									<mainClass>it.micheledichio.moneytransfers.App</mainClass>
 								</manifest>
 							</archive>
 						</configuration>
